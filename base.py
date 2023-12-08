@@ -37,6 +37,7 @@ def commit(repo):
 
 def commitAndCheckout(repo,branch):
     addAll(repo)
+    commit(repo)
     checkout(repo,branch)
 
 def getPostUpdateInfo():
