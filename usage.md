@@ -8,7 +8,7 @@ svn
 
 git
 
-python-git
+gitpython
 
 
 
