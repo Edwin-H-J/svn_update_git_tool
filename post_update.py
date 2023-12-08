@@ -1,4 +1,5 @@
 import json,git,os,sys
+
 from base import *
 
 if __name__ == '__main__':
@@ -15,6 +16,11 @@ if __name__ == '__main__':
     if checkSVNHadConflict(repo_path):
         sys.stderr.write("SVN had conflict,stop auto commit")
         exit(1)
-    addAll(repo)
-    commit(repo)
+    try:
+        addAll(repo)
+        commit(repo)
+    except git.GitCommandError as e:
+        if str(e.stdout).find("nothing to commit, working tree clean") == -1:
+            sys.stderr.write(e)
+            exit(1)
     exit(0)
