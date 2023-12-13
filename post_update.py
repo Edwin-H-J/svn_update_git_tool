@@ -16,11 +16,6 @@ if __name__ == '__main__':
     if checkSVNHadConflict(repo_path):
         sys.stderr.write("SVN had conflict,stop auto commit")
         exit(1)
-    try:
-        addAll(repo)
-        commit(repo)
-    except git.GitCommandError as e:
-        if str(e.stdout).find("nothing to commit, working tree clean") == -1:
-            sys.stderr.write(e)
-            exit(1)
+    addAll(repo)
+    commit(repo)
     exit(0)

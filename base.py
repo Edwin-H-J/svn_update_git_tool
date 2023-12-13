@@ -33,7 +33,13 @@ def addAll(repo):
     repo.git.add('--all')
 
 def commit(repo):
-    repo.git.commit('-a','-m','auto commit')
+    try:
+        repo.git.commit('-a','-m','auto commit')
+    except git.GitCommandError as e:
+        if str(e.stdout).find("nothing to commit, working tree clean") == -1:
+            sys.stderr.write(e)
+            exit(1)
+    
 
 def commitAndCheckout(repo,branch):
     addAll(repo)
